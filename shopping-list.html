@@ -103,10 +103,11 @@
         #cart-content {
             flex: 1;
             overflow-y: auto;
+            padding: 15px;
         }
 
         #close-cart {
-            color: balck;
+            color: black;
             font-size: x-large;
             float: right;
             margin: 4px;
@@ -115,6 +116,13 @@
         #close-cart:hover {
             transform: scale(1.046);
             cursor: pointer;
+        }
+
+        #clear-all {
+            color: black;
+            font-size: x-large;
+            float: left;
+            margin: 4px;
         }
 
         #sub-content {
@@ -156,17 +164,60 @@
             close_cart.addEventListener("click" , function() {
                 cart_div.style.display = "none";
             });
+
+            const user_input = document.getElementById("user-input");
+            const save = document.getElementById("save");
+            const counter = document.getElementById("counter");
+            const cart_content = document.getElementById("cart-content");
+
+            let items = [];
+
+            items = JSON.parse(localStorage.getItem("items")) || [];
+
+            function render() {
+                cart_content.innerHTML = "";
+
+                items.forEach(function(item) {
+                    const h2 = document.createElement("h2");
+                    h2.innerText = item;
+                    cart_content.appendChild(h2);
+                });
+
+                counter.innerText = items.length;
+            }
+
+            render();
+
+            save.addEventListener("click" , function() {
+                const value = user_input.value.trim();
+                
+                if (value === "") return;
+
+                items.push(value);
+                user_input.value = "";
+
+                localStorage.setItem("items", JSON.stringify(items));
+
+                render();
+            });
+
+            const clear_all = document.getElementById("clear-all");
+
+            clear_all.addEventListener("click", function () {
+                items = [];
+                localStorage.removeItem("items");
+                render();
+            });
         });
     </script>
 </head>
 <body>
     <div id="body-div">
         <div id="cart-div">
+            <button id="clear-all">clear list</button>
             <button id="close-cart"><b>x</b></button>
 
-            <div id="cart-content">
-                
-            </div>
+            <div id="cart-content"></div>
         </div>
 
         <div id="container">
