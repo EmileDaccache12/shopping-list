@@ -135,6 +135,12 @@
             color: rgb(111, 0, 133);
         }
 
+        .item-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         @media (max-width: 400px) {
             #container {
                 max-height: 450px;
@@ -182,10 +188,28 @@
             function render() {
                 cart_content.innerHTML = "";
 
-                items.forEach(function(item) {
+                items.forEach(function(item, number) {
+                    const div = document.createElement("div");
+                    div.className = "item-row"
+
                     const h2 = document.createElement("h2");
                     h2.innerText = item;
-                    cart_content.appendChild(h2);
+
+                    const button = document.createElement("button");
+                    button.innerText = "❌";
+
+                    button.addEventListener("click", function() {
+                        items.splice(number, 1);
+
+                        localStorage.setItem("items", JSON.stringify(items));
+
+                        render();
+                    });
+
+                    div.appendChild(button);
+                    div.appendChild(h2);
+
+                    cart_content.appendChild(div);
                 });
 
                 counter.innerText = items.length;
