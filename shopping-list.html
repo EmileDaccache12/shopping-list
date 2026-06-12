@@ -78,9 +78,14 @@
         }
 
         #save {
-            font-size: 120%;
+            font-size: 125%;
             border-radius: 13px;
             background-color: rgb(198, 71, 227);
+        }
+
+        #save:hover {
+            cursor: pointer;
+            transform: scale(1.021);
         }
 
         #cart-div {
@@ -165,8 +170,9 @@
 
             <div id="content">
                 <div id="stack">
-                    <input type="text" id="user-input"><br>
-                    <button id="save"><b>Add To Cart</b></button>
+                    <label for="input">- type your items here:</label>
+                    <input type="text" placeholder="ex: watermellon" id="user-input"><br>
+                    <button id="save"><b>Add To List</b></button>
                 </div>
                 <div id="sub-content">
                     <br><br><br>
