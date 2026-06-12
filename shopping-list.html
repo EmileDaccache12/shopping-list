@@ -98,12 +98,17 @@
             z-index: 999;
             border: 2px solid rgb(72, 72, 72);
             display: none;
+            flex-direction: column;
         }
 
         #cart-content {
             flex: 1;
             overflow-y: auto;
             padding: 15px;
+        }
+
+        #header {
+            display: block;
         }
 
         #close-cart {
@@ -154,9 +159,9 @@
 
             document.getElementById("cart-button").addEventListener("click" , function() {
                 if (cart_div.style.display === "none") {
-                    cart_div.style.display = "block";
+                    cart_div.style.display = "flex";
                 }
-                else if (cart_div.style.display === "block") {
+                else if (cart_div.style.display === "flex") {
                     cart_div.style.display = "none";
                 }
             });
@@ -214,8 +219,10 @@
 <body>
     <div id="body-div">
         <div id="cart-div">
-            <button id="clear-all">clear list</button>
-            <button id="close-cart"><b>x</b></button>
+            <div id="header">
+                <button id="clear-all">clear list</button>
+                <button id="close-cart"><b>x</b></button>
+            </div>
 
             <div id="cart-content"></div>
         </div>
