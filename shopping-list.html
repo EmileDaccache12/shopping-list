@@ -9,26 +9,145 @@
         #body-div {
             background-color: rgb(207, 78, 227);
             background-image: linear-gradient(to bottom right, rgb(140, 30, 242), rgb(164, 61, 180), rgb(170, 48, 162));
-            height: 800px;
+            min-height: 100vh;
             width: auto;
-            padding: 20px;
+            padding: 32px;  
         }
 
-        #container1 {
+        #container {
             margin: auto;
             padding: 3px;
             border: 4px solid rgb(240, 240, 198);
             border-radius: 15px;
             background-color: rgb(245, 245, 198);
+            width: auto;
+            max-width: 470px;
+            height: 85vh;
+            min-height: 620px;
+        }
+
+        #cart-button {
+            float: right;
+            width: 60px;
+            height: auto;
+            border: 0;
+            padding: 0%;
+            background-color: rgb(245, 245, 198);
+        }
+
+        #cart-button:hover {
+            transform: scale(1.04);
+        }
+
+        #cart-icon {
+            width: 100%;
+            height: auto;
+            border-radius: 100%;
+        }
+
+        #cart-icon:hover {
+            border: 2.4px solid black;
+        }
+
+        #counter {
+            padding: 0%;
+            margin:0;
+            color: red;
+            float: right;
+            position: absolute;
+            font-size: large;
+        }
+        
+        #content {
+            margin-top: 175px;
+        }
+
+        #stack {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+            margin: auto;
+        }
+
+        #user-input {
+            font-size: x-large;
+            border-radius: 15px;
+            height: 60px;
+            border: 2px solid rgb(111, 0, 133);
+        }
+
+        #save {
+            font-size: 120%;
+            border-radius: 13px;
+            background-color: rgb(198, 71, 227);
+        }
+
+        #cart-div {
+            position: fixed;
+            top: 1;
+            left: 0;
             width: 300px;
-            height: 500px;
+            height: 90vh;
+            background-color: white;
+            z-index: 999;
+            border: 2px solid rgb(72, 72, 72);
+            display: none;
+        }
+
+        #close-cart {
+            color: balck;
+            font-size: x-large;
+            float: right;
+            margin: 4px;
+        }
+
+        #close-cart:hover {
+            transform: scale(1.046);
         }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded" , function() {
+            const close_cart = document.getElementById("close-cart");
+            const cart_div = document.getElementById("cart-div");
+
+            cart_div.style.display = "none"
+
+            document.getElementById("cart-button").addEventListener("click" , function() {
+                if (cart_div.style.display === "none") {
+                    cart_div.style.display = "block";
+                }
+                else if (cart_div.style.display === "block") {
+                    cart_div.style.display = "none";
+                }
+            });
+
+            close_cart.addEventListener("click" , function() {
+                cart_div.style.display = "none";
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="body-div">
-        <div id="container1">
+        <div id="cart-div">
+            <button id="close-cart"><b>x</b></button>
+        </div>
 
+        <div id="container">
+            <button id="cart-button">
+                <p id="counter"><b>0</b></p>
+                <img src="shopping cart img.jpeg" alt="cart" id="cart-icon">
+            </button>
+            
+            <h1><b><u>SHOPPING LIST:</u></b></h1>
+
+            <div id="content">
+                <div id="stack">
+                    <input type="text" id="user-input"><br>
+                    <button id="save"><b>Add To Cart</b></button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
